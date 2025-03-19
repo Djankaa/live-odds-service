@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessage;
 import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessageCode;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
