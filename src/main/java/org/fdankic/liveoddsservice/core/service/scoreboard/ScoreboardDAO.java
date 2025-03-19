@@ -8,5 +8,6 @@ public interface ScoreboardDAO {
     void saveScoreboardMatch(String rawMatchData);
     void updateScoreboardMatch(String rawMatchData);
     void deleteScoreboardMatch(String rawMatchData);
+    List<Match> getAll();
     List<Match> getAll(String matchStatus);
 }
