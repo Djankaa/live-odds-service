@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.domain.Match;
+import org.fdankic.liveoddsservice.domain.MatchStatus;
 
 @RequiredArgsConstructor
 public class MatchScoreUpdateMessage implements LiveOddsMessage {
@@ -22,7 +23,7 @@ public class MatchScoreUpdateMessage implements LiveOddsMessage {
     private final int awayScore;
 
     @JsonProperty
-    private final String status = "in_progress";
+    private final String status = MatchStatus.MATCH_STATUS_IN_PROGRESS;
 
     @Override
     public String getMessageCode() {

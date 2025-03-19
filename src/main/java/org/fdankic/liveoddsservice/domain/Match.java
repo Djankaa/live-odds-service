@@ -15,7 +15,7 @@ public class Match {
 
     private int homeScore = 0;
     private int awayScore = 0;
-    private String status = "init";
+    private String status = MatchStatus.MATCH_STATUS_IN_PROGRESS;
 
     public Match(String id, String homeTeam, String awayTeam) {
         this.id = id;

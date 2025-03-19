@@ -3,6 +3,7 @@ package org.fdankic.liveoddsservice.core.service.liveodds;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fdankic.liveoddsservice.domain.MatchStatus;
 
 @RequiredArgsConstructor
 public class MatchFinishMessage implements LiveOddsMessage {
@@ -13,7 +14,7 @@ public class MatchFinishMessage implements LiveOddsMessage {
     private final String matchId;
 
     @JsonProperty
-    private final String status = "finished";
+    private final String status = MatchStatus.MATCH_STATUS_FINISHED;
 
     @Override
     public String getMessageCode() {

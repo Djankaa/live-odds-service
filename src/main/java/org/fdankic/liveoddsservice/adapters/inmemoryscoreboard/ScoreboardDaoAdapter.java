@@ -64,9 +64,10 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
     }
 
     @Override
-    public List<Match> getAll() {
+    public List<Match> getAll(String matchStatus) {
         return scoreBoard.values()
                 .stream()
+                .filter(scoreboardMatch -> matchStatus == null || matchStatus.isEmpty() || matchStatus.equals(scoreboardMatch.getStatus()))
                 .map(scoreboardMatch -> new Match(
                         scoreboardMatch.getMatchId(),
                         scoreboardMatch.getHomeTeam(),
