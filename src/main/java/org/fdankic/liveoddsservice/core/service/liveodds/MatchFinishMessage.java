@@ -8,7 +8,7 @@ import org.fdankic.liveoddsservice.domain.MatchStatus;
 @RequiredArgsConstructor
 public class MatchFinishMessage implements LiveOddsMessage {
     @JsonProperty
-    final String messageCode = "MATCH_FINISH";
+    final String messageCode = LiveOddsMessageCode.MATCH_FINISH;
 
     @JsonProperty
     private final String matchId;

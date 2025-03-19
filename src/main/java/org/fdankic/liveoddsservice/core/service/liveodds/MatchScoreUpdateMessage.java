@@ -11,7 +11,7 @@ import org.fdankic.liveoddsservice.domain.MatchStatus;
 @RequiredArgsConstructor
 public class MatchScoreUpdateMessage implements LiveOddsMessage {
     @JsonProperty
-    final String messageCode = "MATCH_SCORE_UPDATE";
+    final String messageCode = LiveOddsMessageCode.MATCH_SCORE_UPDATE;
 
     @JsonProperty
     private final String matchId;

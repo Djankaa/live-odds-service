@@ -37,7 +37,7 @@ class LiveOddsServiceTest {
         List<LiveOddsMessage> feedServiceMessages = feedService.getFeedMessages();
         assertEquals(1, feedServiceMessages.size());
         assertEquals(message, feedServiceMessages.get(0));
-        assertEquals("MATCH_START", message.getMessageCode());
+        assertEquals(LiveOddsMessageCode.MATCH_START, message.getMessageCode());
     }
 
     @Test
@@ -54,7 +54,7 @@ class LiveOddsServiceTest {
         List<LiveOddsMessage> feedServiceMessages = feedService.getFeedMessages();
         assertEquals(1, feedServiceMessages.size());
         assertEquals(message, feedServiceMessages.get(0));
-        assertEquals("MATCH_SCORE_UPDATE", message.getMessageCode());
+        assertEquals(LiveOddsMessageCode.MATCH_SCORE_UPDATE, message.getMessageCode());
     }
 
     @Test
@@ -71,6 +71,6 @@ class LiveOddsServiceTest {
         List<LiveOddsMessage> feedServiceMessages = feedService.getFeedMessages();
         assertEquals(1, feedServiceMessages.size());
         assertEquals(message, feedServiceMessages.get(0));
-        assertEquals("MATCH_FINISH", message.getMessageCode());
+        assertEquals(LiveOddsMessageCode.MATCH_FINISH, message.getMessageCode());
     }
 }

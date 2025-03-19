@@ -3,6 +3,7 @@ package org.fdankic.liveoddsservice.core.service.feed;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessage;
+import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessageCode;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
 import org.springframework.stereotype.Service;
 
@@ -47,17 +48,16 @@ public class FeedService extends Thread {
 
     private void processFeedMessage() {
         feedMessages.removeIf(message -> {
-            System.out.println(message.getMessageCode());
-            System.out.println(message.toJson());
+            this.feedPrintMessage(message);
 
             switch(message.getMessageCode()) {
-                case "MATCH_START":
+                case LiveOddsMessageCode.MATCH_START:
                     scoreboardDAO.saveScoreboardMatch(message.toJson());
                     break;
-                case "MATCH_SCORE_UPDATE":
+                case LiveOddsMessageCode.MATCH_SCORE_UPDATE:
                     scoreboardDAO.updateScoreboardMatch(message.toJson());
                     break;
-                case "MATCH_FINISH":
+                case LiveOddsMessageCode.MATCH_FINISH:
                     scoreboardDAO.deleteScoreboardMatch(message.toJson());
                     break;
                 default:
@@ -65,6 +65,11 @@ public class FeedService extends Thread {
 
             return true;
         });
+    }
+
+    public void feedPrintMessage(LiveOddsMessage message) {
+        System.out.println(message.getMessageCode());
+        System.out.println(message.toJson());
     }
 
     public void stopFeed() {

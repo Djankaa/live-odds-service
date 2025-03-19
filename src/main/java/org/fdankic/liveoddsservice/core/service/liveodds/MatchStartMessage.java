@@ -1,17 +1,14 @@
 package org.fdankic.liveoddsservice.core.service.liveodds;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
-import org.fdankic.liveoddsservice.domain.Match;
 import org.fdankic.liveoddsservice.domain.MatchStatus;
 
 @RequiredArgsConstructor
 public class MatchStartMessage implements LiveOddsMessage {
     @JsonProperty
-    final String messageCode = "MATCH_START";
+    final String messageCode = LiveOddsMessageCode.MATCH_START;
 
     @JsonProperty
     private final String matchId;
