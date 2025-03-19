@@ -35,7 +35,6 @@ public class MatchSimulatorEvent extends Thread {
             }
 
             String goal = this.goalChance(match.getHomeTeam(), match.getAwayTeam());
-
             if (!goal.isEmpty()) {
                 matchService.updateMatch(match.getId(), goal);
             }

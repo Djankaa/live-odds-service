@@ -8,6 +8,7 @@ import org.fdankic.liveoddsservice.core.service.liveodds.MatchScoreUpdateMessage
 import org.fdankic.liveoddsservice.core.service.liveodds.MatchStartMessage;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
 import org.fdankic.liveoddsservice.domain.Match;
+import org.fdankic.liveoddsservice.domain.MatchStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,11 @@ public class MatchService {
     public void updateMatch(String matchId, String team) {
         Match match = this.getMatch(matchId);
 
+        if (!match.getStatus().equals(MatchStatus.MATCH_STATUS_IN_PROGRESS)) {
+            System.out.println("Match status is " + match.getStatus() + " , for update it has to be in progress!");
+            return;
+        }
+
         if (team.equals(match.getHomeTeam())) {
             match.setHomeScore(match.getHomeScore() + 1);
         } else if (team.equals(match.getAwayTeam())) {
@@ -39,6 +45,13 @@ public class MatchService {
     }
 
     public void finishMatch(String matchId) {
+        Match match = this.getMatch(matchId);
+
+        if (match.getStatus().equals(MatchStatus.MATCH_STATUS_FINISHED)) {
+            System.out.println("Match already finished");
+            return;
+        }
+
         LiveOddsMessage finishMessage = new MatchFinishMessage(matchId);
         feedService.processLiveOddsMessage(finishMessage);
     }
