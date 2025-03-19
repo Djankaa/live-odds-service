@@ -7,14 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/scoreboard")
+@RequestMapping("/api")
 @RequiredArgsConstructor
-public class HomeController {
+public class APIController {
     private final ScoreboardService scoreboardService;
 
-    @GetMapping
+    @GetMapping("/scoreboard")
     public ResponseEntity<?> getScoreboardAPI() {
         return ResponseEntity.ok(scoreboardService.getScoreboard());
     }
-
 }
