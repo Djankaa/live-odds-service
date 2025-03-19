@@ -1,48 +1,36 @@
 package org.fdankic.liveoddsservice.adapters.simulator;
 
-import jakarta.annotation.PostConstruct;
-import org.fdankic.liveoddsservice.core.service.feed.FeedService;
-import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchFinishMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchScoreUpdateMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchStartMessage;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.fdankic.liveoddsservice.core.service.match.MatchService;
 import org.springframework.stereotype.Controller;
 
 import java.util.concurrent.TimeUnit;
 
 @Controller
+@RequiredArgsConstructor
 public class MatchSimulator {
-    private final FeedService feedService;
+    private final MatchService matchService;
 
-    public MatchSimulator(FeedService feedService) {
-        this.feedService = feedService;
-    }
+    public void startSimulation() {
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    public void startSimulation() throws InterruptedException {
-        feedService.start();
+        MatchSimulatorEvent matchEvent1 = new MatchSimulatorEvent( matchService,"Croatia", "France");
+        matchEvent1.start();
 
-        Match match = new Match(Match.generateMatchId(),"Croatia", "France");
-        LiveOddsMessage msg = new MatchStartMessage(match.getId(), match.getHomeTeam(), match.getAwayTeam());
-        feedService.processLiveOddsMessage(msg);
+        MatchSimulatorEvent matchEvent2 = new MatchSimulatorEvent( matchService,"Spain", "Italy");
+        matchEvent2.start();
 
-        TimeUnit.SECONDS.sleep(3);
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        Match match1 = new Match(Match.generateMatchId(),"Belgium", "Italy");
-        LiveOddsMessage msg1 = new MatchStartMessage(match1.getId(), match1.getHomeTeam(), match1.getAwayTeam());
-        feedService.processLiveOddsMessage(msg1);
-
-        TimeUnit.SECONDS.sleep(2);
-        LiveOddsMessage msgS = new MatchScoreUpdateMessage(match.getId(), 1, 0);
-        feedService.processLiveOddsMessage(msgS);
-
-        TimeUnit.SECONDS.sleep(5);
-
-        LiveOddsMessage msg4 = new MatchFinishMessage(match.getId());
-        feedService.processLiveOddsMessage(msg4);
-
-        TimeUnit.SECONDS.sleep(6);
-        feedService.stopFeed();
+        MatchSimulatorEvent matchEvent3 = new MatchSimulatorEvent(matchService,"Denmark", "England");
+        matchEvent3.start();
     }
 }

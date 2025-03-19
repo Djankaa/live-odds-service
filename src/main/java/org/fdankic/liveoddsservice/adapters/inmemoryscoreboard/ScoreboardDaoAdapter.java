@@ -82,6 +82,19 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
                 )).toList();
     }
 
+    public Match getByMatchId(String matchId) {
+        ScoreboardMatch scoreboardMatch = this.findByMatchId(matchId);
+        return new Match(
+                scoreboardMatch.getMatchId(),
+                scoreboardMatch.getHomeTeam(),
+                scoreboardMatch.getAwayTeam(),
+                scoreboardMatch.getHomeScore(),
+                scoreboardMatch.getAwayScore(),
+                scoreboardMatch.getStatus()
+        );
+    }
+
+    // private
     private ScoreboardMatch findByMatchId(String matchId) {
         return scoreBoard.get(matchId);
     }

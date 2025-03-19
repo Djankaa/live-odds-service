@@ -13,6 +13,8 @@ public class ScoreboardService {
     private final ScoreboardDAO scoreboardDAO;
 
     public List<Match> getScoreboard() {
-        return scoreboardDAO.getAll(MatchStatus.MATCH_STATUS_IN_PROGRESS);
+        // TODO remove this, used now only for testing purposes
+        return scoreboardDAO.getAll();
+        //return scoreboardDAO.getAll(MatchStatus.MATCH_STATUS_IN_PROGRESS);
     }
 }

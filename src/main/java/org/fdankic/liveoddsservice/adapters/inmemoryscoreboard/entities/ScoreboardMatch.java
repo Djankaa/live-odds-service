@@ -15,7 +15,6 @@ public class ScoreboardMatch {
     private int awayScore;
     private int totalScore;
     private String status;
-    private int duration = 0;
 
     public ScoreboardMatch() {}
 }
