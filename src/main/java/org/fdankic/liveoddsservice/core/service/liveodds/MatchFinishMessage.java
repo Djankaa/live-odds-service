@@ -12,14 +12,12 @@ public class MatchFinishMessage implements LiveOddsMessage {
     @JsonProperty
     private final String matchId;
 
+    @JsonProperty
+    private final String status = "finished";
+
     @Override
     public String getMessageCode() {
         return this.messageCode;
-    }
-
-    @Override
-    public String formatMessage() {
-        return this.messageCode + " " + this.matchId;
     }
 
     @Override

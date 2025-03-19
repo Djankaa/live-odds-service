@@ -21,14 +21,12 @@ public class MatchScoreUpdateMessage implements LiveOddsMessage {
     @JsonProperty
     private final int awayScore;
 
+    @JsonProperty
+    private final String status = "in_progress";
+
     @Override
     public String getMessageCode() {
         return this.messageCode;
-    }
-
-    @Override
-    public String formatMessage() {
-        return this.messageCode + " " + this.homeScore + " - " + this.awayScore;
     }
 
     @Override

@@ -17,17 +17,16 @@ public class MatchStartMessage implements LiveOddsMessage {
 
     @JsonProperty
     private final String homeTeam;
+
     @JsonProperty
     private final String awayTeam;
+
+    @JsonProperty
+    private final String status = "in_progress";
 
     @Override
     public String getMessageCode() {
         return this.messageCode;
-    }
-
-    @Override
-    public String formatMessage() {
-        return this.messageCode + " " + this.matchId + " duration: 0'min";
     }
 
     @Override

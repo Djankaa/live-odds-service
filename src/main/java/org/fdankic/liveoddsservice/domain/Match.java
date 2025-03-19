@@ -23,6 +23,15 @@ public class Match {
         this.awayTeam = awayTeam;
     }
 
+    public Match(String id, String homeTeam, String awayTeam, int homeScore, int awayScore, String status) {
+        this.id = id;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        this.status = status;
+    }
+
     public static String generateMatchId() {
         return UUID.randomUUID().toString();
     }

@@ -21,7 +21,6 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
             ObjectMapper objectMapper = new ObjectMapper();
             ScoreboardMatch scoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
 
-            //scoreboardMatch.setTotalScore(scoreboardMatch.getHomeScore() + scoreboardMatch.getAwayScore());
             scoreBoard.put(scoreboardMatch.getMatchId(), scoreboardMatch);
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,10 +30,16 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
     @Override
     public void updateScoreboardMatch(String rawMatchData) {
         try {
+            // Getting new data
             ObjectMapper objectMapper = new ObjectMapper();
-            ScoreboardMatch scoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
+            ScoreboardMatch newScoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
 
-            //scoreboardMatch.setTotalScore(scoreboardMatch.getHomeScore() + scoreboardMatch.getAwayScore());
+            // Taking out existing scoreboard and updating its values.
+            ScoreboardMatch scoreboardMatch = this.findByMatchId(newScoreboardMatch.getMatchId());
+            scoreboardMatch.setHomeScore(newScoreboardMatch.getHomeScore());
+            scoreboardMatch.setAwayScore(newScoreboardMatch.getAwayScore());
+            scoreboardMatch.setTotalScore(scoreboardMatch.getHomeScore() + scoreboardMatch.getAwayScore());
+
             scoreBoard.put(scoreboardMatch.getMatchId(), scoreboardMatch);
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,10 +49,15 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
     @Override
     public void deleteScoreboardMatch(String rawMatchData) {
         try {
+            // Getting new incoming data
             ObjectMapper objectMapper = new ObjectMapper();
-            ScoreboardMatch scoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
+            ScoreboardMatch newScoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
 
-            scoreBoard.remove(scoreboardMatch.getMatchId());
+            // Fetching existing data and overriding the status.
+            ScoreboardMatch scoreboardMatch = this.findByMatchId(newScoreboardMatch.getMatchId());
+            scoreboardMatch.setStatus(newScoreboardMatch.getStatus());
+
+            scoreBoard.put(scoreboardMatch.getMatchId(), scoreboardMatch);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +70,14 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
                 .map(scoreboardMatch -> new Match(
                         scoreboardMatch.getMatchId(),
                         scoreboardMatch.getHomeTeam(),
-                        scoreboardMatch.getAwayTeam()
+                        scoreboardMatch.getAwayTeam(),
+                        scoreboardMatch.getHomeScore(),
+                        scoreboardMatch.getAwayScore(),
+                        scoreboardMatch.getStatus()
                 )).toList();
+    }
+
+    private ScoreboardMatch findByMatchId(String matchId) {
+        return scoreBoard.get(matchId);
     }
 }
