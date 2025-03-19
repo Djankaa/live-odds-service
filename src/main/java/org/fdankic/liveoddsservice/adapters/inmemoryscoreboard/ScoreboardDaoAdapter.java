@@ -1,6 +1,5 @@
 package org.fdankic.liveoddsservice.adapters.inmemoryscoreboard;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fdankic.liveoddsservice.adapters.inmemoryscoreboard.entities.ScoreboardMatch;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;

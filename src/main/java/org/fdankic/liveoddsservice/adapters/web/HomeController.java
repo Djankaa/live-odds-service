@@ -3,7 +3,6 @@ package org.fdankic.liveoddsservice.adapters.web;
 
 import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
