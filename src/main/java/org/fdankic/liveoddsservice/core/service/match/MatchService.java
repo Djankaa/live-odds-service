@@ -2,10 +2,7 @@ package org.fdankic.liveoddsservice.core.service.match;
 
 import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.core.service.feed.FeedService;
-import org.fdankic.liveoddsservice.core.service.liveodds.LiveOddsMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchFinishMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchScoreUpdateMessage;
-import org.fdankic.liveoddsservice.core.service.liveodds.MatchStartMessage;
+import org.fdankic.liveoddsservice.core.service.liveodds.*;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
 import org.fdankic.liveoddsservice.domain.Match;
 import org.fdankic.liveoddsservice.domain.MatchStatus;
@@ -54,6 +51,18 @@ public class MatchService {
 
         LiveOddsMessage finishMessage = new MatchFinishMessage(matchId);
         feedService.processLiveOddsMessage(finishMessage);
+    }
+
+    public void updateMatchDuration(String matchId) {
+        Match match = this.getMatch(matchId);
+
+        if (!match.getStatus().equals(MatchStatus.MATCH_STATUS_IN_PROGRESS)) {
+            System.out.println("Match status is " + match.getStatus() + " , for update it has to be in progress!");
+            return;
+        }
+
+        LiveOddsMessage aliveMessage = new MatchAliveMessage(match.getId(), 1);
+        feedService.processLiveOddsMessage(aliveMessage);
     }
 
     private Match getMatch(String matchId) {

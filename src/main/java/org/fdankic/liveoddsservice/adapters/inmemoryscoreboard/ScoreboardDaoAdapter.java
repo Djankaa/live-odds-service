@@ -27,7 +27,7 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
     }
 
     @Override
-    public void updateScoreboardMatch(String rawMatchData) {
+    public void updateScoreboardMatchScore(String rawMatchData) {
         try {
             // Getting new data
             ObjectMapper objectMapper = new ObjectMapper();
@@ -38,6 +38,23 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
             scoreboardMatch.setHomeScore(newScoreboardMatch.getHomeScore());
             scoreboardMatch.setAwayScore(newScoreboardMatch.getAwayScore());
             scoreboardMatch.setTotalScore(scoreboardMatch.getHomeScore() + scoreboardMatch.getAwayScore());
+
+            scoreBoard.put(scoreboardMatch.getMatchId(), scoreboardMatch);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateScoreboardMatchDuration(String rawMatchData) {
+        try {
+            // Getting new data
+            ObjectMapper objectMapper = new ObjectMapper();
+            ScoreboardMatch newScoreboardMatch = objectMapper.readValue(rawMatchData, ScoreboardMatch.class);
+
+            // Taking out existing scoreboard and updating its values.
+            ScoreboardMatch scoreboardMatch = this.findByMatchId(newScoreboardMatch.getMatchId());
+            scoreboardMatch.setDuration(scoreboardMatch.getDuration() + newScoreboardMatch.getDuration());
 
             scoreBoard.put(scoreboardMatch.getMatchId(), scoreboardMatch);
         } catch (Exception e) {
@@ -78,7 +95,8 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
                         scoreboardMatch.getAwayTeam(),
                         scoreboardMatch.getHomeScore(),
                         scoreboardMatch.getAwayScore(),
-                        scoreboardMatch.getStatus()
+                        scoreboardMatch.getStatus(),
+                        scoreboardMatch.getDuration()
                 )).toList();
     }
 
@@ -90,7 +108,8 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
                 scoreboardMatch.getAwayTeam(),
                 scoreboardMatch.getHomeScore(),
                 scoreboardMatch.getAwayScore(),
-                scoreboardMatch.getStatus()
+                scoreboardMatch.getStatus(),
+                scoreboardMatch.getDuration()
         );
     }
 

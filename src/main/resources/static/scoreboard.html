@@ -67,25 +67,25 @@
                 if (match.status === "in_progress") {
                     matchElement.classList.add('in-progress');
                     matchElement.innerHTML = `
-                            <div>Live</div>
-                        `;
+                        <div>Live ${match.duration || 0}'</div>
+                    `;
                 } else if (match.status === "finished") {
                     matchElement.classList.add('finished');
                     matchElement.innerHTML = `
-                            <div>Finished</div>
-                        `;
+                        <div>Finished</div>
+                    `;
                 }
 
                 matchElement.innerHTML += `
-                        <div class="team">
-                            <span>${match.homeTeam}</span>
-                            <span>${match.homeScore}</span>
-                        </div>
-                        <div class="team">
-                            <span>${match.awayTeam}</span>
-                            <span>${match.awayScore}</span>
-                        </div>
-                    `;
+                    <div class="team">
+                        <span>${match.homeTeam}</span>
+                        <span>${match.homeScore}</span>
+                    </div>
+                    <div class="team">
+                        <span>${match.awayTeam}</span>
+                        <span>${match.awayScore}</span>
+                    </div>
+                `;
 
                 matchesContainer.appendChild(matchElement);
             });
@@ -95,7 +95,7 @@
     }
 
     fetchMatches();
-    setInterval(fetchMatches, 1000); // Refresh scores every 5 seconds
+    setInterval(fetchMatches, 1000); // Refresh scores every second
 </script>
 </body>
 </html>

@@ -53,11 +53,14 @@ public class FeedService extends Thread {
             this.feedPrintMessage(message);
 
             switch(message.getMessageCode()) {
+                case LiveOddsMessageCode.MATCH_ALIVE:
+                    scoreboardDAO.updateScoreboardMatchDuration(message.toJson());
+                    break;
                 case LiveOddsMessageCode.MATCH_START:
                     scoreboardDAO.saveScoreboardMatch(message.toJson());
                     break;
                 case LiveOddsMessageCode.MATCH_SCORE_UPDATE:
-                    scoreboardDAO.updateScoreboardMatch(message.toJson());
+                    scoreboardDAO.updateScoreboardMatchScore(message.toJson());
                     break;
                 case LiveOddsMessageCode.MATCH_FINISH:
                     scoreboardDAO.deleteScoreboardMatch(message.toJson());
