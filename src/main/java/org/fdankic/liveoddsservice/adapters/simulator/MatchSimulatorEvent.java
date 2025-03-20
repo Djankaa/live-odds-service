@@ -4,6 +4,7 @@ import org.fdankic.liveoddsservice.core.service.match.MatchService;
 import org.fdankic.liveoddsservice.domain.Match;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchSimulatorEvent extends Thread {
     private final MatchService matchService;
@@ -29,7 +30,7 @@ public class MatchSimulatorEvent extends Thread {
 
         while (System.currentTimeMillis() - startTime < duration) {
             try {
-                Thread.sleep(this.nextGoalChance());
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -43,17 +44,12 @@ public class MatchSimulatorEvent extends Thread {
         matchService.finishMatch(match.getId());
     }
 
-    private int nextGoalChance() {
-        int goalChanceIn = new Random().nextInt(25 - 5) + 5;
-        return goalChanceIn * 1000;
-    }
-
     private String goalChance(String homeTeam, String awayTeam) {
-        int random = new Random().nextInt(100) + 1;
+        int random = ThreadLocalRandom.current().nextInt(1, 101);
 
-        if (random < 25) {
+        if (random <= 4) {
             return homeTeam;
-        } else if (random > 75) {
+        } else if (random >= 96) {
             return awayTeam;
         }
 
