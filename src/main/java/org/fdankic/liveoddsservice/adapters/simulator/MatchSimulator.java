@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class MatchSimulator {
     private final MatchService matchService;
+    private final MatchSimulatorConfig matchSimulatorConfig;
 
     public void startSimulation() {
         try {
@@ -18,10 +19,18 @@ public class MatchSimulator {
             e.printStackTrace();
         }
 
-        MatchSimulatorEvent matchEvent1 = new MatchSimulatorEvent( matchService,"Croatia", "France");
+        MatchSimulatorEvent matchEvent1 = new MatchSimulatorEvent(
+                matchService,
+                matchSimulatorConfig,
+                "Croatia",
+                "France");
         matchEvent1.start();
 
-        MatchSimulatorEvent matchEvent2 = new MatchSimulatorEvent( matchService,"Spain", "Italy");
+        MatchSimulatorEvent matchEvent2 = new MatchSimulatorEvent(
+                matchService,
+                matchSimulatorConfig,
+                "Spain",
+                "Italy");
         matchEvent2.start();
 
         try {
@@ -30,10 +39,18 @@ public class MatchSimulator {
             e.printStackTrace();
         }
 
-        MatchSimulatorEvent matchEvent3 = new MatchSimulatorEvent(matchService,"Denmark", "England");
+        MatchSimulatorEvent matchEvent3 = new MatchSimulatorEvent(
+                matchService,
+                matchSimulatorConfig,
+                "Denmark",
+                "England");
         matchEvent3.start();
 
-        MatchSimulatorEvent matchEvent4 = new MatchSimulatorEvent(matchService,"Poland", "Germany");
+        MatchSimulatorEvent matchEvent4 = new MatchSimulatorEvent(
+                matchService,
+                matchSimulatorConfig,
+                "Poland",
+                "Germany");
         matchEvent4.start();
 
         try {
@@ -42,7 +59,11 @@ public class MatchSimulator {
             e.printStackTrace();
         }
 
-        MatchSimulatorEvent matchEvent5 = new MatchSimulatorEvent(matchService,"Portugal", "Switzerland");
+        MatchSimulatorEvent matchEvent5 = new MatchSimulatorEvent(
+                matchService,
+                matchSimulatorConfig,
+                "Portugal",
+                "Switzerland");
         matchEvent5.start();
     }
 }
