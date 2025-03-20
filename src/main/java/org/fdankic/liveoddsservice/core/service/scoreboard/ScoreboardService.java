@@ -5,7 +5,7 @@ import org.fdankic.liveoddsservice.domain.Match;
 import org.fdankic.liveoddsservice.domain.MatchStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -13,8 +13,17 @@ public class ScoreboardService {
     private final ScoreboardDAO scoreboardDAO;
 
     public List<Match> getScoreboard() {
-        // TODO remove this, used now only for testing purposes
-        return scoreboardDAO.getAll();
-        //return scoreboardDAO.getAll(MatchStatus.MATCH_STATUS_IN_PROGRESS);
+        List<Match> matches = new ArrayList<>(
+            scoreboardDAO.getAll(/*MatchStatus.MATCH_STATUS_IN_PROGRESS*/)
+        );
+
+        matches.sort(
+            Comparator
+                .comparing(Match::getTotalScore)
+                .reversed()
+                .thenComparing(Match::getDuration)
+        );
+
+        return matches;
     }
 }

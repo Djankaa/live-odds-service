@@ -32,5 +32,17 @@ public class MatchSimulator {
 
         MatchSimulatorEvent matchEvent3 = new MatchSimulatorEvent(matchService,"Denmark", "England");
         matchEvent3.start();
+
+        MatchSimulatorEvent matchEvent4 = new MatchSimulatorEvent(matchService,"Poland", "Germany");
+        matchEvent4.start();
+
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        MatchSimulatorEvent matchEvent5 = new MatchSimulatorEvent(matchService,"Portugal", "Switzerland");
+        matchEvent5.start();
     }
 }

@@ -15,6 +15,8 @@ public class Match {
 
     private int homeScore = 0;
     private int awayScore = 0;
+    private int totalScore = 0;
+
     private String status = MatchStatus.MATCH_STATUS_IN_PROGRESS;
 
     private int duration = 0;
@@ -33,6 +35,8 @@ public class Match {
         this.awayScore = awayScore;
         this.status = status;
         this.duration = duration;
+
+        this.totalScore = homeScore + awayScore;
     }
 
     public static String generateMatchId() {

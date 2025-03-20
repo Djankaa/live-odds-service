@@ -1,18 +1,23 @@
 package org.fdankic.liveoddsservice.core.service.match;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.fdankic.liveoddsservice.core.service.feed.FeedService;
 import org.fdankic.liveoddsservice.core.service.liveodds.*;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
 import org.fdankic.liveoddsservice.domain.Match;
 import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class MatchService {
-    private final FeedService feedService;
     private final ScoreboardDAO scoreboardDAO;
+
+    @Setter
+    @Autowired
+    private FeedService feedService;
 
     public Match startMatch(String homeTeam, String awayTeam) {
         Match match = new Match(Match.generateMatchId(), homeTeam, awayTeam);
@@ -49,6 +54,8 @@ public class MatchService {
             return;
         }
 
+        match.setStatus(MatchStatus.MATCH_STATUS_FINISHED);
+
         LiveOddsMessage finishMessage = new MatchFinishMessage(matchId);
         feedService.processLiveOddsMessage(finishMessage);
     }
@@ -65,7 +72,7 @@ public class MatchService {
         feedService.processLiveOddsMessage(aliveMessage);
     }
 
-    private Match getMatch(String matchId) {
+    public Match getMatch(String matchId) {
         return scoreboardDAO.getByMatchId(matchId);
     }
 }

@@ -102,6 +102,10 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
 
     public Match getByMatchId(String matchId) {
         ScoreboardMatch scoreboardMatch = this.findByMatchId(matchId);
+        if (scoreboardMatch == null) {
+            return null;
+        }
+
         return new Match(
                 scoreboardMatch.getMatchId(),
                 scoreboardMatch.getHomeTeam(),
@@ -115,6 +119,11 @@ public class ScoreboardDaoAdapter implements ScoreboardDAO {
 
     // private
     private ScoreboardMatch findByMatchId(String matchId) {
-        return scoreBoard.get(matchId);
+        ScoreboardMatch scoreboardMatch = scoreBoard.get(matchId);
+        if (scoreboardMatch != null) {
+            return scoreboardMatch;
+        }
+
+        return null;
     }
 }
