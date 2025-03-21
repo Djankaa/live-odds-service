@@ -80,7 +80,7 @@ class LiveOddsServiceTest {
                 "Croatia",
                 "France"
         );
-        LiveOddsMessage message = new MatchAliveMessage(match.getId(), 1);
+        LiveOddsMessage message = new MatchAliveMessage(match.getId());
 
         feedService.processLiveOddsMessage(message);
 

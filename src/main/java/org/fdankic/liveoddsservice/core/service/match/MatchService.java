@@ -68,7 +68,7 @@ public class MatchService {
             return;
         }
 
-        LiveOddsMessage aliveMessage = new MatchAliveMessage(match.getId(), 1);
+        LiveOddsMessage aliveMessage = new MatchAliveMessage(match.getId());
         feedService.processLiveOddsMessage(aliveMessage);
     }
 

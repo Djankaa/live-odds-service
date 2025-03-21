@@ -51,4 +51,15 @@ public class MatchServiceTest {
 
         assertEquals(MatchStatus.MATCH_STATUS_FINISHED, match.getStatus());
     }
+
+    @Test
+    void matchService_updateMatchDurationTest() {
+        matchService.finishMatch(match.getId());
+
+        String rawMatchData = "{\"matchId\":\"fa447c0c-4eeb-4703-8482-fc56347bbe3d\", \"duration\":\"1\"}";
+        scoreboardAdapter.updateScoreboardMatchDuration(rawMatchData);
+        match = matchService.getMatch(match.getId());
+
+        assertEquals(1, match.getDuration());
+    }
 }

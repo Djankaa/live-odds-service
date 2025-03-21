@@ -13,7 +13,7 @@ public class MatchAliveMessage implements LiveOddsMessage {
     private final String matchId;
 
     @JsonProperty
-    private final int duration;
+    private final int duration = 1;
 
     @Override
     public String getMessageCode() {
