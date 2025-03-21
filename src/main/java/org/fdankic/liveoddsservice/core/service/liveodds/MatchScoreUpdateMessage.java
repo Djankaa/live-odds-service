@@ -1,12 +1,9 @@
 package org.fdankic.liveoddsservice.core.service.liveodds;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.fdankic.liveoddsservice.core.domain.MatchStatus;
 
 @RequiredArgsConstructor
 public class MatchScoreUpdateMessage implements LiveOddsMessage {

@@ -3,7 +3,7 @@ package org.fdankic.liveoddsservice.adapters.inmemoryscoreboard;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fdankic.liveoddsservice.adapters.inmemoryscoreboard.entities.ScoreboardMatch;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
-import org.fdankic.liveoddsservice.domain.Match;
+import org.fdankic.liveoddsservice.core.domain.Match;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

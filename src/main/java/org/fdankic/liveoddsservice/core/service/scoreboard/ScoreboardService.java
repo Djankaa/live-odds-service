@@ -1,8 +1,7 @@
 package org.fdankic.liveoddsservice.core.service.scoreboard;
 
 import lombok.RequiredArgsConstructor;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.fdankic.liveoddsservice.core.domain.Match;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

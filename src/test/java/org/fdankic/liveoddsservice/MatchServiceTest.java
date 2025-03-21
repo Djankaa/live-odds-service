@@ -4,8 +4,8 @@ import org.fdankic.liveoddsservice.adapters.inmemoryscoreboard.ScoreboardDaoAdap
 import org.fdankic.liveoddsservice.core.service.feed.FeedService;
 import org.fdankic.liveoddsservice.core.service.match.MatchService;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.fdankic.liveoddsservice.core.domain.Match;
+import org.fdankic.liveoddsservice.core.domain.MatchStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

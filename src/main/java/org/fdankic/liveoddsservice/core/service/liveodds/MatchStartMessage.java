@@ -3,7 +3,7 @@ package org.fdankic.liveoddsservice.core.service.liveodds;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.fdankic.liveoddsservice.core.domain.MatchStatus;
 
 @RequiredArgsConstructor
 public class MatchStartMessage implements LiveOddsMessage {

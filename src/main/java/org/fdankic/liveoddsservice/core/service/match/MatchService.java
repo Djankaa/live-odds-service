@@ -5,8 +5,8 @@ import lombok.Setter;
 import org.fdankic.liveoddsservice.core.service.feed.FeedService;
 import org.fdankic.liveoddsservice.core.service.liveodds.*;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.fdankic.liveoddsservice.domain.MatchStatus;
+import org.fdankic.liveoddsservice.core.domain.Match;
+import org.fdankic.liveoddsservice.core.domain.MatchStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

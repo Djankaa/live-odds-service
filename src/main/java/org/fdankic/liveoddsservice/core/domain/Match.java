@@ -1,4 +1,4 @@
-package org.fdankic.liveoddsservice.domain;
+package org.fdankic.liveoddsservice.core.domain;
 
 import lombok.Getter;
 import lombok.Setter;

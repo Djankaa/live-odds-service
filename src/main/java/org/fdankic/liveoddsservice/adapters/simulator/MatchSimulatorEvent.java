@@ -2,13 +2,8 @@ package org.fdankic.liveoddsservice.adapters.simulator;
 
 import lombok.RequiredArgsConstructor;
 import org.fdankic.liveoddsservice.core.service.match.MatchService;
-import org.fdankic.liveoddsservice.domain.Match;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.fdankic.liveoddsservice.core.domain.Match;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RequiredArgsConstructor

@@ -1,7 +1,6 @@
 package org.fdankic.liveoddsservice.core.service.scoreboard;
 
-import org.fdankic.liveoddsservice.adapters.inmemoryscoreboard.entities.ScoreboardMatch;
-import org.fdankic.liveoddsservice.domain.Match;
+import org.fdankic.liveoddsservice.core.domain.Match;
 
 import java.util.List;
 
