@@ -40,7 +40,7 @@ The least amount a simulation can last is 90 seconds.
 Default configuration is 180 seconds duration, 2 seconds represent 1 minute in real match.
 
 <br/>
-**How to use?**
+**HOW TO USE**
 
 Start the project
 
