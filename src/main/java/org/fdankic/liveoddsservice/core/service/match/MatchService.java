@@ -68,7 +68,7 @@ public class MatchService {
             throw new InvalidMatchStatusException("Match status is " + match.getStatus() + " , for update it has to be in progress!");
         }
 
-        if (match.getDuration() > 5) {
+        if (match.getDuration() > 90) {
             throw new MatchDurationException("Match duration is higher than 90 minutes");
         }
 

@@ -2,16 +2,16 @@ Live Odds Service
 
 Service consist of few parts.
 
-**MatchService** 
+**MatchService** <br/>
 Service which handles logic for starting/updating/finishing a match.
 
-**ScoreboardService**
+**ScoreboardService** <br/>
 Entry point for previewing the scoreboard, provides an interface as well for outgoing adapter.
 
-**LiveOdds** 
+**LiveOdds** <br/>
 Is used for generating messages that will feed the FeedService.
 
-**FeedService** 
+**FeedService** <br/>
 Runs as a singleton thread waiting for LiveOdds messages to income to execute actions on matches.
 
 Architecturally service is using port & adapters approach.
@@ -24,7 +24,7 @@ Only changes that would be needed are how the data comes in, no change on busine
 The same is for the outgoing part of application, if we wanted to change from in-memory to sending messages
 to Kafka/RMQ or persisting them to database it would only require changing the adapter implementation.
 
-<br/><br/>
+<br/>
 
 **MatchSimulator**
 
@@ -39,6 +39,7 @@ The least amount a simulation can last is 90 seconds.
 
 Default configuration is 180 seconds duration, 2 seconds represent 1 minute in real match.
 
+<br/>
 **How to use?**
 
 Start the project
@@ -59,4 +60,13 @@ You don't have the need to refresh the page, data should change in real-time.
 After the match has been finished it should disappear from the scoreboard.
 
 
-
+You can add a new match in the simulator by adding
+```
+MatchSimulatorEvent matchEvent5 = new MatchSimulatorEvent(
+    matchService,
+    matchSimulatorConfig,
+    "Portugal",
+    "Switzerland");
+    
+matchEvent5.start();
+```
