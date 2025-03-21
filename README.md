@@ -1,6 +1,6 @@
-Live Odds Service
+**Live Odds Service**
 
-Service consist of few parts.
+Service consist of few parts:
 
 **MatchService** <br/>
 Service which handles logic for starting/updating/finishing a match.
@@ -14,6 +14,7 @@ Is used for generating messages that will feed the FeedService.
 **FeedService** <br/>
 Runs as a singleton thread waiting for LiveOdds messages to income to execute actions on matches.
 
+<br/>
 Architecturally service is using port & adapters approach.
 This allows changing incoming adapter the current implementation is a **MatchSimulator**.
 For saving adapter we are using a **inmemoryscoreboard**
@@ -40,6 +41,7 @@ The least amount a simulation can last is 90 seconds.
 Default configuration is 180 seconds duration, 2 seconds represent 1 minute in real match.
 
 <br/>
+
 **HOW TO USE**
 
 Start the project
