@@ -2,6 +2,9 @@ package org.fdankic.liveoddsservice.core.service.match;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.fdankic.liveoddsservice.core.service.exceptions.InvalidMatchStatusException;
+import org.fdankic.liveoddsservice.core.service.exceptions.MatchDurationException;
+import org.fdankic.liveoddsservice.core.service.exceptions.MatchFinishedException;
 import org.fdankic.liveoddsservice.core.service.feed.FeedService;
 import org.fdankic.liveoddsservice.core.service.liveodds.*;
 import org.fdankic.liveoddsservice.core.service.scoreboard.ScoreboardDAO;
@@ -32,8 +35,7 @@ public class MatchService {
         Match match = this.getMatch(matchId);
 
         if (!match.getStatus().equals(MatchStatus.MATCH_STATUS_IN_PROGRESS)) {
-            System.out.println("Match status is " + match.getStatus() + " , for update it has to be in progress!");
-            return;
+            throw new InvalidMatchStatusException("Match status is " + match.getStatus() + " , for update it has to be in progress!");
         }
 
         if (team.equals(match.getHomeTeam())) {
@@ -50,8 +52,7 @@ public class MatchService {
         Match match = this.getMatch(matchId);
 
         if (match.getStatus().equals(MatchStatus.MATCH_STATUS_FINISHED)) {
-            System.out.println("Match already finished");
-            return;
+            throw new MatchFinishedException("Match has been already finished");
         }
 
         match.setStatus(MatchStatus.MATCH_STATUS_FINISHED);
@@ -64,8 +65,11 @@ public class MatchService {
         Match match = this.getMatch(matchId);
 
         if (!match.getStatus().equals(MatchStatus.MATCH_STATUS_IN_PROGRESS)) {
-            System.out.println("Match status is " + match.getStatus() + " , for update it has to be in progress!");
-            return;
+            throw new InvalidMatchStatusException("Match status is " + match.getStatus() + " , for update it has to be in progress!");
+        }
+
+        if (match.getDuration() > 5) {
+            throw new MatchDurationException("Match duration is higher than 90 minutes");
         }
 
         LiveOddsMessage aliveMessage = new MatchAliveMessage(match.getId());

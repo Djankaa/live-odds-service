@@ -33,11 +33,20 @@ public class MatchSimulatorEvent extends Thread {
                 e.printStackTrace();
             }
 
-            matchService.updateMatchDuration(match.getId());
+            try {
+                matchService.updateMatchDuration(match.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             String goal = this.goalChance(match.getHomeTeam(), match.getAwayTeam());
             if (!goal.isEmpty()) {
-                matchService.updateMatch(match.getId(), goal);
+                try {
+                    matchService.updateMatch(match.getId(), goal);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
 
