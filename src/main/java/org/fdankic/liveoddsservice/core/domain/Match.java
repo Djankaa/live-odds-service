@@ -23,22 +23,30 @@ public class Match {
 
     public Match(String id, String homeTeam, String awayTeam) {
         this.id = id;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+        this.homeTeam = this.validateName(homeTeam);
+        this.awayTeam = this.validateName(awayTeam);
     }
 
     public Match(String id, String homeTeam, String awayTeam, int homeScore, int awayScore, String status, int duration) {
         this.id = id;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+        this.homeTeam = this.validateName(homeTeam);
+        this.awayTeam = this.validateName(awayTeam);
         this.homeScore = homeScore;
         this.awayScore = awayScore;
         this.status = status;
         this.duration = duration;
-
         this.totalScore = homeScore + awayScore;
     }
 
+    public String validateName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Match name cannot be null or empty");
+        }
+
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+
+    // Generating matchId
     public static String generateMatchId() {
         return UUID.randomUUID().toString();
     }

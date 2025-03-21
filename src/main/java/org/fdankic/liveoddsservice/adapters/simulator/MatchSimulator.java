@@ -22,15 +22,15 @@ public class MatchSimulator {
         MatchSimulatorEvent matchEvent1 = new MatchSimulatorEvent(
                 matchService,
                 matchSimulatorConfig,
-                "Croatia",
-                "France");
+                "CROATIA",
+                "france");
         matchEvent1.start();
 
         MatchSimulatorEvent matchEvent2 = new MatchSimulatorEvent(
                 matchService,
                 matchSimulatorConfig,
-                "Spain",
-                "Italy");
+                "sPain",
+                "ITalY");
         matchEvent2.start();
 
         try {
