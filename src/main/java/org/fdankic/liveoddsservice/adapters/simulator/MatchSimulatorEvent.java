@@ -20,9 +20,6 @@ public class MatchSimulatorEvent extends Thread {
     public void generate() {
         Match match = matchService.startMatch(awayTeam, homeTeam);
 
-        System.out.println("match duration " + matchSimulatorConfig.getMatchDuration());
-        System.out.println("match segment every " + matchSimulatorConfig.getMatchSegments());
-
         long startTime = System.currentTimeMillis();
         long duration = matchSimulatorConfig.getMatchDuration() * 1000L;
 
