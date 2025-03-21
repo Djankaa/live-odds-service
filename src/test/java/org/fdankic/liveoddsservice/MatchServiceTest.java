@@ -54,12 +54,31 @@ public class MatchServiceTest {
 
     @Test
     void matchService_updateMatchDurationTest() {
-        matchService.finishMatch(match.getId());
+        matchService.updateMatchDuration(match.getId());
 
         String rawMatchData = "{\"matchId\":\"fa447c0c-4eeb-4703-8482-fc56347bbe3d\", \"duration\":\"1\"}";
         scoreboardAdapter.updateScoreboardMatchDuration(rawMatchData);
         match = matchService.getMatch(match.getId());
 
         assertEquals(1, match.getDuration());
+    }
+
+    @Test
+    void matchService_updateMatchScoreTest() {
+        matchService.updateMatch(match.getId(), "Croatia");
+
+        String rawMatchData = "{\"matchId\":\"fa447c0c-4eeb-4703-8482-fc56347bbe3d\", \"homeScore\":\"1\", \"awayScore\":\"0\"}";
+        scoreboardAdapter.updateScoreboardMatchScore(rawMatchData);
+        match = matchService.getMatch(match.getId());
+
+        assertEquals(1, match.getHomeScore());
+        assertEquals(0, match.getAwayScore());
+
+        rawMatchData = "{\"matchId\":\"fa447c0c-4eeb-4703-8482-fc56347bbe3d\", \"homeScore\":\"2\", \"awayScore\":\"1\"}";
+        scoreboardAdapter.updateScoreboardMatchScore(rawMatchData);
+        match = matchService.getMatch(match.getId());
+
+        assertEquals(2, match.getHomeScore());
+        assertEquals(1, match.getAwayScore());
     }
 }
